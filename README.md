@@ -1,41 +1,106 @@
 # DMS Plugin Index
 
-This repository is the public index and standards hub for my Dank Linux / DankMaterialShell plugin ecosystem.
+> Public home for my Dank Linux / DankMaterialShell plugin ecosystem.
 
+This repository is the index, documentation hub, and showcase entry for my DMS plugins.
 It does not host plugin source code directly.
-Each plugin lives in its own repository and is linked from here together with its demo video.
+Each plugin lives in its own repository and is linked here together with its demo video and compatibility notes.
 
-## What This Repository Contains
+## Quick Links
 
-- development rules in `AGENTS.md`
-- a public-facing plugin directory
-- links to plugin repositories
-- links to demo videos and previews
+- Development rules: [AGENTS.md](./AGENTS.md)
+- DMS docs: <https://danklinux.com/docs/>
+- Plugin development guide: <https://danklinux.com/docs/dankmaterialshell/plugin-development>
+- Official plugin registry: <https://plugins.danklinux.com/>
+
+## Purpose
+
+Use this repository to:
+
+- publish shared plugin development standards
+- maintain a public plugin directory
+- link to plugin repositories
+- link to demo videos, screenshots, and previews
+- track compatibility and release notes at a high level
+
+Do not use this repository to:
+
+- store plugin source code
+- keep temporary plugin working trees
+- mix multiple plugin implementations into one monorepo
 
 ## Plugin Directory
 
-Add one row per released or public plugin.
+Add one row per public or released plugin.
 
-| Plugin | Repository | Demo Video | Status | Notes |
-| --- | --- | --- | --- | --- |
-| _Coming soon_ | Add repo link | Add video link | Planned | Plugin repositories will be linked here after migration |
+| Plugin | Type | Repository | Demo | DMS | Status | Summary |
+| --- | --- | --- | --- | --- | --- | --- |
+| _Coming soon_ | Widget | Add repo link | Add video link | 1.4+ | Planned | Public plugin repositories will appear here after migration |
 
-Template for new entries:
+Template for a new entry:
 
 ```md
-| Plugin Name | [GitHub](https://github.com/<user>/<repo>) | [Video](https://example.com/demo) | Active | Short description |
+| Plugin Name | Widget / Launcher / Daemon / Desktop | [GitHub](https://github.com/<user>/<repo>) | [Video](https://example.com/demo) | 1.4+ | Active | Short one-line description |
 ```
 
-## Development Rules
+Recommended status labels:
 
-Development standards for all plugins are maintained in [AGENTS.md](./AGENTS.md).
+- `Planned`
+- `Active`
+- `Beta`
+- `Archived`
 
-Core policy:
+## Demo And Media Conventions
+
+Each public plugin entry should eventually have:
+
+- one repository link
+- one video demo link
+- one short summary line
+- one compatibility note if needed
+
+Optional local media can live under `assets/` using the plugin id or repo name:
+
+```text
+assets/
+└── <plugin-id>/
+    ├── cover.png
+    ├── thumb.png
+    └── notes.txt
+```
+
+Recommended demo coverage:
+
+- show the widget or entry point
+- show the main workflow in under 30 to 60 seconds
+- show one real interaction, not only static screenshots
+
+## Standards
+
+Shared development standards for all plugins are maintained in [AGENTS.md](./AGENTS.md).
+
+Core rules:
 
 - this root repository tracks standards and navigation only
 - each plugin must have its own independent Git repository
 - plugin repositories should follow the shared DMS workflow documented in `AGENTS.md`
 - commit messages use the format `<type>: <summary>`
+
+Examples:
+
+- `feat: add weather plugin entry`
+- `docs: update plugin publishing rules`
+- `fix: correct repository link for launcher plugin`
+
+## Maintenance Workflow
+
+When a new plugin becomes public:
+
+1. create or publish the plugin in its own repository
+2. add the repository link to the directory table above
+3. add the demo video link
+4. add screenshots or thumbnails under `assets/` if you want local previews
+5. update compatibility or status if needed
 
 ## Repository Layout
 
@@ -43,12 +108,13 @@ Core policy:
 .
 ├── AGENTS.md
 ├── README.md
-└── assets/            # optional screenshots, thumbnails, shared media
+└── assets/
+    └── .gitkeep
 ```
 
-## Planned Additions
+## Roadmap
 
-- plugin repository links
-- demo video links
-- screenshots or thumbnails
-- release and compatibility notes
+- add live plugin entries after repository migration
+- add thumbnails or covers for each public plugin
+- add compatibility notes across DMS versions
+- add release and changelog links for each plugin
