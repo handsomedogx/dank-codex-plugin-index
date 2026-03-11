@@ -13,7 +13,7 @@ Treat this root repository as documentation and navigation only.
 Track here:
 
 - `AGENTS.md`
-- generated `README.md` and `README.zh-CN.md`
+- `README.md`
 - shared documentation, templates, and index assets
 - links to plugin repositories and demo videos
 
@@ -23,15 +23,11 @@ Do not track here:
 - plugin-specific source code that belongs in its own repository
 - temporary local `Dank*` directories that will be migrated elsewhere
 
-Generated documentation rule:
+Root documentation rule:
 
-- do not manually edit generated readme files
-- update `content/site.json` and, when necessary, `scripts/generate_readmes.py`
-- regenerate with `python3 scripts/generate_readmes.py`
-- root index content should be maintained in English as the single source language
-- all translated readmes should be generated through Azure Translator only
-- local or CI generation requires `README_TRANSLATOR_AZURE_API_KEY` and `README_TRANSLATOR_AZURE_REGION`
-- supported env vars are `README_TRANSLATOR_AZURE_API_KEY`, `README_TRANSLATOR_AZURE_ENDPOINT`, and `README_TRANSLATOR_AZURE_REGION`
+- maintain `README.md` manually in English
+- do not add generated multilingual README outputs to this repository unless the user explicitly asks
+- keep links, showcase content, and navigation current in `README.md`
 
 ## Source Of Truth
 
@@ -183,7 +179,7 @@ For this root repository:
 - commit only shared standards, index pages, and navigation content
 - ignore local plugin folders that are only present during development
 - keep plugin links and demo links in `README.md`
-- treat `README.md` and `README.zh-CN.md` as generated outputs
+- treat `README.md` as the canonical landing page
 
 Default ignore rules should cover at least:
 
@@ -204,7 +200,6 @@ Before committing, run the smallest relevant validation for the files touched. P
 
 - `jq . plugin.json`
 - `python3 -m py_compile` for changed Python helpers
-- `python3 scripts/generate_readmes.py` when root index content changes
 - `dms ipc call plugins reload <pluginId>` when the plugin is installed in the active DMS session
 
 Use this commit format:

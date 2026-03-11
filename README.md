@@ -1,5 +1,3 @@
-<!-- AUTO-GENERATED FILE. Edit `content/site.json` or `scripts/generate_readmes.py` instead. -->
-
 <p align="center">
   <img src="./assets/icons/index.svg" width="92" alt="DMS Plugin Index icon" />
 </p>
@@ -7,8 +5,6 @@
 # DMS Plugin Index
 
 > Independent DMS plugins. Shared standards. One public directory.
-
-**English** | [Simplified Chinese](./README.zh-CN.md)
 
 `DMS Plugin Index` is the public landing page for my Dank Linux / DankMaterialShell plugin ecosystem.
 This repository keeps the shared rules, plugin discovery links, demo references, and high-level compatibility notes.
@@ -155,11 +151,6 @@ Shared development standards for all plugins are maintained in [AGENTS.md](./AGE
 .
 ├── AGENTS.md
 ├── README.md
-├── README.zh-CN.md
-├── content/
-│   └── site.json
-├── scripts/
-│   └── generate_readmes.py
 └── assets/
     ├── .gitkeep
     └── icons/
