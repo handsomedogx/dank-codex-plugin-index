@@ -163,23 +163,24 @@ Important registry rule:
 
 ## Git Workflow
 
-This root repository is not a multi-plugin source monorepo.
-Each plugin must be maintained as an independent Git repository.
+This workspace uses one plugin per repository only.
+Do not create multi-plugin plugin-source repositories in this workspace.
+Each plugin must be maintained and published as its own independent Git repository.
 
 For every new plugin created in this workspace:
 
 1. create the plugin directory in its own location
 2. run `git init -b main` inside that plugin directory immediately
 3. add a `.gitignore` before the first commit
-4. create an initial commit once the scaffold is runnable
-5. publish that plugin to its own remote repository
+4. add an MIT `LICENSE` file before the first commit
+5. use `handsomedogx` as the copyright holder in that MIT license
+6. create an initial commit once the scaffold is runnable
+7. publish that plugin to its own remote repository
 
-For this root repository:
+For the workspace root:
 
-- commit only shared standards, index pages, and navigation content
-- ignore local plugin folders that are only present during development
-- keep plugin links and demo links in `README.md`
-- treat `README.md` as the canonical landing page
+- treat it as a coordination directory for shared docs such as `AGENTS.md`
+- do not treat it as the canonical source repository for plugins
 
 Default ignore rules should cover at least:
 
@@ -188,6 +189,14 @@ Default ignore rules should cover at least:
 - editor or OS junk such as `.DS_Store`, `.idea/`, `.vscode/`
 - temporary logs or screenshots produced during development
 
+Every new plugin repository should include a standard MIT license with this header:
+
+```text
+MIT License
+
+Copyright (c) <year> handsomedogx
+```
+
 Commit discipline:
 
 - make one commit per completed logical change
@@ -195,6 +204,8 @@ Commit discipline:
 - do not mix unrelated changes into the same commit
 - do not amend, rebase, or rewrite history unless the user explicitly asks
 - if Git identity is missing, set a repository-local identity instead of changing the global Git config
+- in a single-plugin repository, do not use the plugin name as `scope` by default because it duplicates repository context
+- only use `scope` when it adds real information such as `ui`, `ocr`, `settings`, `ipc`, or `docs`
 
 Before committing, run the smallest relevant validation for the files touched. Prefer:
 
@@ -202,22 +213,31 @@ Before committing, run the smallest relevant validation for the files touched. P
 - `python3 -m py_compile` for changed Python helpers
 - `dms ipc call plugins reload <pluginId>` when the plugin is installed in the active DMS session
 
-Use this commit format:
+Default commit format:
 
 ```text
 <type>: <summary>
 ```
 
+Optional commit format when `scope` adds useful information:
+
+```text
+<type>(<scope>): <summary>
+```
+
 Rules:
 
 - `type` must be one of `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
+- `scope` is optional
+- if `scope` is used, prefer subsystem names instead of the plugin name in a single-plugin repository
 - `summary` should be short, imperative, and describe the user-visible or engineering change
 
 Examples:
 
 - `feat: bootstrap translation plugin`
-- `fix: constrain translator panel height`
+- `fix(ui): constrain translator panel height`
 - `docs: document niri keybind setup`
+- `fix(ocr): silence screenshot cancel errors`
 
 ## How To Help In Future Turns
 
