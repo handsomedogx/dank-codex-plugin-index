@@ -1,0 +1,44 @@
+name: Generate Readmes
+
+on:
+  push:
+    paths:
+      - "content/**"
+      - "scripts/generate_readmes.py"
+      - ".github/workflows/generate-readmes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate multilingual readmes
+        run: python3 scripts/generate_readmes.py
+
+      - name: Commit generated readmes
+        shell: bash
+        run: |
+          if git diff --quiet -- README.md README.zh-CN.md; then
+            echo "No README updates were generated."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md README.zh-CN.md
+          git commit -m "docs: regenerate multilingual readmes"
+          git push

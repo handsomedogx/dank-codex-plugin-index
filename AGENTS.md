@@ -13,7 +13,7 @@ Treat this root repository as documentation and navigation only.
 Track here:
 
 - `AGENTS.md`
-- `README.md`
+- generated `README.md` and `README.zh-CN.md`
 - shared documentation, templates, and index assets
 - links to plugin repositories and demo videos
 
@@ -22,6 +22,12 @@ Do not track here:
 - local plugin working trees
 - plugin-specific source code that belongs in its own repository
 - temporary local `Dank*` directories that will be migrated elsewhere
+
+Generated documentation rule:
+
+- do not manually edit generated readme files
+- update `content/site.json` and, when necessary, `scripts/generate_readmes.py`
+- regenerate with `python3 scripts/generate_readmes.py`
 
 ## Source Of Truth
 
@@ -173,6 +179,7 @@ For this root repository:
 - commit only shared standards, index pages, and navigation content
 - ignore local plugin folders that are only present during development
 - keep plugin links and demo links in `README.md`
+- treat `README.md` and `README.zh-CN.md` as generated outputs
 
 Default ignore rules should cover at least:
 
@@ -193,6 +200,7 @@ Before committing, run the smallest relevant validation for the files touched. P
 
 - `jq . plugin.json`
 - `python3 -m py_compile` for changed Python helpers
+- `python3 scripts/generate_readmes.py` when root index content changes
 - `dms ipc call plugins reload <pluginId>` when the plugin is installed in the active DMS session
 
 Use this commit format:
